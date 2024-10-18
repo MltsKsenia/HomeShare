@@ -3,8 +3,13 @@ exports.up = async function (knex) {
   await knex.schema.createTable('reservations', function (table) {
     table.increments('id').primary();
     table.integer('item_id').notNullable().references('id').inTable('items').onDelete('CASCADE');
+
+    // Reservation Creator
     table.integer('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE');
-    table.date('start_date').notNullable();
+
+    // Item Owner
+    table.integer('owner_id').notNullable().references('user_id').inTable('items').onDelete('CASCADE');
+
     table.date('end_date').notNullable();
     table.string('status', 50).defaultTo('pending');
     table.timestamp('created_at').defaultTo(knex.fn.now());
