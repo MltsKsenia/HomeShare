@@ -9,8 +9,8 @@ const reservationRoutes = require('./routes/reservationRoutes');
 
 app.use(express.json());
 
-app.use('/users', userRoutes);
-app.use('/items', itemRoutes);
-app.use('/reservations', reservationRoutes);
+app.use(userRoutes);
+app.use(itemRoutes);
+app.use(reservationRoutes);
 
 module.exports = app;

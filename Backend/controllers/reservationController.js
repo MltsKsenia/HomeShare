@@ -5,10 +5,23 @@ exports.createReservation = async (req, res) => {
     const { item_id, user_id, start_date, end_date } = req.body;
 
     try {
+        // Looking for an owner_id
+        const item = await knex('items')
+            .select('user_id')
+            .where({ id: item_id })
+            .first();
+
+        if (!item) {
+            return res.status(404).json({ error: 'Item not found' });
+        }
+
+        const owner_id = item.user_id; // owner_id = user_id from the items table
+
         const [newReservation] = await knex('reservations')
             .insert({
                 item_id,
                 user_id,
+                owner_id,
                 start_date,
                 end_date,
                 status: 'pending'
@@ -73,13 +86,14 @@ exports.getReservationsByUser = async (req, res) => {
 
     try {
         const reservations = await knex('reservations')
-            .where({ user_id })
+            .where({ 'reservations.user_id': user_id })
             .join('items', 'reservations.item_id', 'items.id')
             .select(
                 'reservations.*',
                 'items.name as item_name',
                 'items.description as item_description',
-                'items.category as item_category'
+                'items.category as item_category',
+                'items.user_id as owner_id'
             );
 
         if (reservations.length === 0) {
@@ -104,7 +118,8 @@ exports.getReservationsByItemOwner = async (req, res) => {
                 'reservations.*',
                 'items.name as item_name',
                 'items.description as item_description',
-                'items.category as item_category'
+                'items.category as item_category',
+                'items.user_id as owner_id'
             );
 
         if (reservations.length === 0) {
