@@ -32,5 +32,5 @@
 - **Backend**: Node.js and Express for handling API requests, user authentication, and booking functionality.
 - **Database**: PostgreSQL for storing information about items, bookings, and users.
 - **Authentication**: JWT for secure user login and controlled access.
-- **File Storage**: Amazon S3 for uploading and storing item photos.
+- **File Storage**: imgbb.com for uploading and storing item photos.
 - **Additional Features**: Push Notifications for alerts and optional integration with Google Calendar API.
