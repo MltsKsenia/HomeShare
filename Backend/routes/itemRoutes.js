@@ -17,4 +17,7 @@ router.get('/items/:id', itemController.getItemById);
 // Delete Item
 router.delete('/items/:id', itemController.deleteItem);
 
+// Search Item
+router.get('/items/search', itemController.searchItems);
+
 module.exports = router;

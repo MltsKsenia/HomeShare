@@ -2,48 +2,23 @@ const db = require('../config/db');
 
 // Create Item
 exports.createItem = async (req, res) => {
+    const { user_id, name, description, category, image_url, available_days } = req.body;
     try {
-        const { user_id, name, description, category, image_url, available_days } = req.body;
+        const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
 
-        if (!user_id || !name) {
-            return res.status(400).json({ error: 'User ID and name are required' });
-        }
-
-        let availableDaysJson = null;
-
-        if (available_days) {
-            if (Array.isArray(available_days)) {
-                availableDaysJson = JSON.stringify(available_days);
-            } else {
-                return res.status(400).json({ error: 'available_days must be an array' });
-            }
-        }
-
-        console.log('Data being inserted:', {
+        const [newItem] = await db('items').insert({
             user_id,
             name,
             description,
-            category,
+            category: formattedCategory,
             image_url,
-            available_days: availableDaysJson
-        });
+            available_days: JSON.stringify(available_days)
+        }).returning('*');
 
-
-        const [itemId] = await db('items')
-            .insert({
-                user_id,
-                name,
-                description,
-                category,
-                image_url,
-                available_days: availableDaysJson
-            })
-            .returning('id');
-
-        res.status(201).json({ message: 'Item created successfully', itemId });
+        res.status(201).json(newItem);
     } catch (error) {
         console.error('Error creating item:', error);
-        res.status(500).json({ error: 'Failed to create item', details: error.message });
+        res.status(500).json({ error: 'Failed to create item' });
     }
 };
 
@@ -132,5 +107,21 @@ exports.deleteItem = async (req, res) => {
     } catch (error) {
         console.error('Error deleting item:', error);
         res.status(500).json({ error: 'Failed to delete item', details: error.message });
+    }
+};
+
+// Search Item
+exports.searchItems = async (req, res) => {
+    const { query } = req.query; // Получаем строку поиска из запроса
+
+    try {
+        // Ищем элементы в таблице items по названию или описанию, которые содержат строку поиска
+        const items = await db('items')
+            .whereILike('name', `%${query}%`)
+            .orWhereILike('description', `%${query}%`);
+
+        res.json(items);
+    } catch (error) {
+        res.status(500).json({ error: `Ошибка при поиске предметов: ${error.message}` });
     }
 };

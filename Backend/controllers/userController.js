@@ -12,8 +12,11 @@ exports.register = async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        await db('users').insert({ username, email, password: hashedPassword });
-        res.status(201).json({ message: 'User registered successfully' });
+        const [userId] = await db('users')
+            .insert({ username, email, password: hashedPassword })
+            .returning('id');
+
+        res.status(201).json({ message: 'User registered successfully', userId });
     } catch (error) {
         res.status(500).json({ error: `Error saving user: ${error.message}` });
     }
@@ -45,7 +48,13 @@ exports.getUser = async (req, res) => {
         const user = await db('users').where({ id: userId }).first();
 
         if (user) {
-            res.json({ id: user.id, username: user.username, email: user.email, created_at: user.created_at });
+            res.json({
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                created_at: user.created_at,
+                profile_image_url: user.profile_image_url,
+            });
         } else {
             res.status(404).json({ error: 'User not found' });
         }
@@ -94,9 +103,12 @@ exports.deleteUser = async (req, res) => {
 
 // Add User Profile Info
 exports.createUserProfile = async (req, res) => {
-    const { user_id, phone_number, full_name, address, profile_image_url, date_of_birth } = req.body;
-
+    let { user_id, phone_number, full_name, address, profile_image_url, date_of_birth } = req.body;
     try {
+        user_id = parseInt(user_id, 10);
+        if (isNaN(user_id)) {
+            return res.status(400).json({ error: 'Invalid user ID' });
+        }
         await db('users')
             .where({ id: user_id })
             .update({
@@ -109,6 +121,7 @@ exports.createUserProfile = async (req, res) => {
 
         res.status(200).json({ message: 'User profile created successfully' });
     } catch (error) {
+        console.error('Error creating user profile:', error);
         res.status(500).json({ error: 'Failed to create user profile', details: error.message });
     }
 };
@@ -132,5 +145,31 @@ exports.updateUserProfile = async (req, res) => {
         res.status(200).json({ message: 'User profile updated successfully' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to update user profile', details: error.message });
+    }
+};
+
+// Get User Profile Info
+exports.getUserProfile = async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const userProfile = await db('users').where({ id: userId }).first();
+
+        if (userProfile) {
+            res.json({
+                id: userProfile.id,
+                username: userProfile.username,
+                email: userProfile.email,
+                phone_number: userProfile.phone_number,
+                full_name: userProfile.full_name,
+                address: userProfile.address,
+                profile_image_url: userProfile.profile_image_url,
+                date_of_birth: userProfile.date_of_birth
+            });
+        } else {
+            res.status(404).json({ error: 'User profile not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: `Failed to retrieve user profile: ${error.message}` });
     }
 };
