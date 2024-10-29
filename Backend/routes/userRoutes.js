@@ -23,4 +23,7 @@ router.post('/profile', userController.createUserProfile);
 // Update Profile Information
 router.put('/profile/:user_id', userController.updateUserProfile);
 
+// Get User Profile Info
+router.get('/user/profile/:id', userController.getUserProfile);
+
 module.exports = router;
