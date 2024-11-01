@@ -1,0 +1,88 @@
+.my-orders {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+}
+
+.my-orders-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0 1rem;
+    padding-bottom: 6rem;
+}
+
+.user-orders {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.item-orders {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.item-thumbnail {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button-approve {
+    flex-shrink: 0;
+    padding: 0.5rem 2rem;
+    font-size: rem;
+    color: #2c695b;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    margin: 0.25rem 0.5rem;
+}
+
+.button-approve:hover {
+    background-color: #3e9682;
+    color: #fff;
+}
+
+.button-approve:active {
+    background-color: #2c695b;
+    color: #fff;
+}
+
+.button-decline,
+.button-delete {
+    flex-shrink: 0;
+    padding: 0.5rem 2rem;
+    font-size: rem;
+    color: #b23939;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    margin: 0.25rem 0.5rem;
+}
+
+.button-decline:hover,
+.button-delete:hover {
+    background-color: #b23939;
+    color: #fff;
+}
+
+.button-decline:active,
+.button-delete:active {
+    background-color: #733232;
+    color: #fff;
+}

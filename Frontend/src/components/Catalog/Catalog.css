@@ -1,3 +1,11 @@
+.catalog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column wrap;
+    width: 100vw !important;
+}
+
 .search-container {
     display: flex;
     align-items: center;
@@ -6,7 +14,7 @@
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
-    max-width: 600px;
+    max-width: 100%;
 }
 
 .search-container input {
@@ -54,8 +62,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    padding: 0 1rem;
-    padding-bottom: 6rem;
+    padding: 0 1rem 6rem 1rem;
 }
 
 .product-card {

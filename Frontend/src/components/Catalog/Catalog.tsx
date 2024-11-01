@@ -73,53 +73,47 @@ const Catalog: React.FC = () => {
     };
 
     return (
-        <div className="home">
-            {/* Header */}
+        <div>
             <Header />
+            <div className="catalog">
+                <div className="search-container">
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                    />
+                </div>
+                <div className="categories">
+                    <button onClick={() => handleCategoryClick(null)} className="category-button">All</button>
+                    {categories.map(category => (
+                        <button
+                            key={category}
+                            onClick={() => handleCategoryClick(category)}
+                            className="category-button"
+                        >
+                            {category}
+                        </button>
+                    ))}
+                </div>
 
-            {/* Search */}
-            <div className="search-container">
-                <input
-                    type="text"
-                    placeholder="Search"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                />
+                <div className="product-grid">
+                    {filteredItems.map(item => (
+                        <div
+                            key={item.id}
+                            className="product-card"
+                            onClick={() => handleItemClick(item.id)}
+                        >
+                            <img
+                                src={item.image_url}
+                                alt={item.name}
+                            />
+                            <h2>{item.name}</h2>
+                            <p>{item.description}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
-
-            {/* Categories */}
-            <div className="categories">
-                <button onClick={() => handleCategoryClick(null)} className="category-button">All</button>
-                {categories.map(category => (
-                    <button
-                        key={category}
-                        onClick={() => handleCategoryClick(category)}
-                        className="category-button"
-                    >
-                        {category}
-                    </button>
-                ))}
-            </div>
-
-            {/* Items Cards */}
-            <div className="product-grid">
-                {filteredItems.map(item => (
-                    <div
-                        key={item.id}
-                        className="product-card"
-                        onClick={() => handleItemClick(item.id)}
-                    >
-                        <img
-                            src={item.image_url}
-                            alt={item.name}
-                        />
-                        <h2>{item.name}</h2>
-                        <p>{item.description}</p>
-                    </div>
-                ))}
-            </div>
-
-            {/* Footer */}
             <Footer />
         </div>
     );

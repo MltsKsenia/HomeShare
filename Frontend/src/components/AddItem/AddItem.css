@@ -1,28 +1,39 @@
-form {
+.add-item {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: column wrap;
 }
 
+form {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 form input {
     background-color: #f8f9fa;
-    border: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     outline: none;
     font-size: 1rem;
-    color: #333;
+    color: #2b3469;
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
+    width: auto;
 }
 
 form textarea {
     background-color: #f8f9fa;
-    border: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     outline: none;
     font-size: 1rem;
-    color: #333;
+    color: #2b3469;
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
+    width: auto;
 }
 
 .file-upload input[type="file"] {
@@ -34,20 +45,22 @@ form textarea {
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
     font-size: 0.9rem;
-    color: #333;
+    color: #2b3469;
     background-color: #f1f1f1;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s;
 }
 
 .custom-file-upload:hover {
     background-color: #4452a3;
+    color: #f1f1f1;
 }
 
 .custom-file-upload:active {
     background-color: #2b3469;
+    color: #f1f1f1;
 }
 
 .add-item-button {
@@ -55,30 +68,31 @@ form textarea {
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
     font-size: 0.9rem;
-    color: #333;
+    color: #2b3469;
     background-color: #f1f1f1;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s;
 }
 
 .add-item-button:hover {
     background-color: #4452a3;
-    color: #fff;
+    color: #f1f1f1;
 }
 
 .add-item-button:active {
     background-color: #2b3469;
-    color: #fff;
+    color: #f1f1f1;
 }
 
 .react-datepicker__input-container input {
     background-color: #f8f9fa;
-    border: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     outline: none;
     font-size: 1rem;
-    color: #333;
+    color: #2b3469;
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
 }
