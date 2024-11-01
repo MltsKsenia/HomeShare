@@ -22,7 +22,7 @@ exports.register = async (req, res) => {
     }
 };
 
-// Login
+// Log In
 exports.login = async (req, res) => {
     const { username, password } = req.body;
 
@@ -38,6 +38,23 @@ exports.login = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: `Error during login: ${error.message}` });
     }
+};
+
+// Log Out
+exports.logoutUser = (req, res) => {
+    if (!req.session) {
+        return res.status(500).json({ error: 'Session not initialized' });
+    }
+
+    req.session.token = null; // или delete req.session.token;
+
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Error logging out:', err);
+            return res.status(500).json({ error: 'Failed to log out' });
+        }
+        res.json({ message: 'Logged out successfully' });
+    });
 };
 
 // Get User
@@ -65,10 +82,14 @@ exports.getUser = async (req, res) => {
 
 // Update User data
 exports.updateUser = async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const { username, email } = req.body;
+    const userId = parseInt(req.params.userId, 10);
+    console.log('User ID from params:', userId);
 
+    const { username, email } = req.body;
+
+    console.log('Updating user:', { username, email });
+
+    try {
         const updatedRows = await db('users')
             .where({ id: userId })
             .update({ username, email, updated_at: db.fn.now() });
@@ -81,6 +102,36 @@ exports.updateUser = async (req, res) => {
     } catch (error) {
         console.error('Error updating user:', error);
         res.status(500).json({ error: 'Failed to update user' });
+    }
+};
+
+// Update Password
+exports.updatePassword = async (req, res) => {
+    const { userId } = req.params;
+    const { currentPassword, newPassword } = req.body;
+
+    try {
+        const user = await db('users').where({ id: userId }).first();
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Incorrect current password' });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await db('users')
+            .where({ id: userId })
+            .update({ password: hashedPassword, updated_at: db.fn.now() });
+
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error('Error updating password:', error);
+        res.status(500).json({ message: 'Error updating password', error });
     }
 };
 
@@ -128,12 +179,12 @@ exports.createUserProfile = async (req, res) => {
 
 // Update User Profile Info
 exports.updateUserProfile = async (req, res) => {
-    const { user_id } = req.params;
+    const { userId } = req.params;
     const { phone_number, full_name, address, profile_image_url, date_of_birth } = req.body;
 
     try {
         await db('users')
-            .where({ id: user_id })
+            .where({ id: userId })
             .update({
                 phone_number,
                 full_name,

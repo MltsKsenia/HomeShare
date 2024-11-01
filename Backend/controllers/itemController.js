@@ -85,7 +85,7 @@ exports.getItemById = async (req, res) => {
         if (!item) {
             return res.status(404).json({ error: 'Item not found' });
         }
-
+        console.log('Fetched item:', item);
         res.status(200).json(item);
     } catch (error) {
         console.error('Error fetching item:', error);
@@ -123,5 +123,28 @@ exports.searchItems = async (req, res) => {
         res.json(items);
     } catch (error) {
         res.status(500).json({ error: `Ошибка при поиске предметов: ${error.message}` });
+    }
+};
+
+// Get all items by user ID
+exports.getItemsByUserId = async (req, res) => {
+    const { user_id } = req.params;
+
+    try {
+        const parsedUserId = parseInt(user_id, 10);
+        if (isNaN(parsedUserId)) {
+            return res.status(400).json({ error: 'Invalid user ID format' });
+        }
+        const items = await db('items').where({ user_id: parsedUserId });
+        console.log("Fetched items:", items);
+
+        if (!items || items.length === 0) {
+            return res.status(404).json({ error: 'No items found for this user' });
+        }
+
+        res.status(200).json({ items });
+    } catch (error) {
+        console.error("Error fetching items:", error);
+        res.status(500).json({ error: 'Failed to fetch items', details: error.message });
     }
 };

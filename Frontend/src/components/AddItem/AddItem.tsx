@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import { useNavigate } from 'react-router-dom';
-import Header from './navigation/Header';
-import Footer from './navigation/Footer';
+import Header from '../navigation/Header/Header';
+import Footer from '../navigation/Footer/Footer';
+import './AddItem.css';
 
 const AddItem: React.FC = () => {
     const [name, setName] = useState('');
@@ -76,8 +77,8 @@ const AddItem: React.FC = () => {
         <div className="add-item">
             {/* Header */}
             <Header />
-            <h2>Add New Item</h2>
             <form onSubmit={handleSubmit}>
+                <h2>Add New Item</h2>
                 <input
                     type="text"
                     placeholder="Name"
@@ -85,11 +86,13 @@ const AddItem: React.FC = () => {
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
+                <br />
                 <textarea
                     placeholder="Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
+                <br />
                 <input
                     type="text"
                     placeholder="Category"
@@ -97,24 +100,32 @@ const AddItem: React.FC = () => {
                     onChange={(e) => setCategory(e.target.value)}
                 />
                 <div>
-                    <label>Upload Image:</label>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                            if (e.target.files && e.target.files[0]) {
-                                uploadImage(e.target.files[0]);
-                            }
-                        }}
-                    />
+                    <br />
+                    <div className="file-upload">
+                        <label htmlFor="fileInput" className="custom-file-upload">
+                            Upload Image
+                        </label>
+                        <input
+                            id="fileInput"
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => {
+                                if (e.target.files && e.target.files[0]) {
+                                    uploadImage(e.target.files[0]);
+                                }
+                            }}
+                        />
+                    </div>
+                    <br />
                 </div>
                 {image_url && (
                     <div>
                         <img src={image_url} alt="Uploaded" style={{ width: '100px', height: '100px' }} />
                     </div>
                 )}
-                <div>
+                <div className='date-picker-container'>
                     <label>Available Days:</label>
+                    <br />
                     <DatePicker
                         selected={startDate}
                         onChange={(date) => date && setStartDate(date)}
@@ -123,6 +134,7 @@ const AddItem: React.FC = () => {
                         endDate={endDate}
                         placeholderText="Start Date"
                     />
+                    <br />
                     <DatePicker
                         selected={endDate}
                         onChange={(date) => date && setEndDate(date)}
@@ -133,7 +145,7 @@ const AddItem: React.FC = () => {
                         placeholderText="End Date"
                     />
                 </div>
-                <button type="submit">Add Item</button>
+                <button className='add-item-button' type="submit">Add Item</button>
             </form>
 
             {/* Footer */}

@@ -25,6 +25,7 @@ export interface ItemCardData {
     image_url: string;
     user_id: number;
     profile?: ProfileFormData;
+    available_days: string[];
 }
 
 export interface ProfileFormData {
@@ -33,4 +34,15 @@ export interface ProfileFormData {
     address: string;
     profile_image_url: string;
     date_of_birth: string;
+}
+
+export interface PasswordUpdateData {
+    currentPassword: string;
+    newPassword: string;
+}
+
+export interface Order {
+    id: number;
+    item_name: string;
+    status: string;
 }

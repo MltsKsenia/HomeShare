@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Header from './navigation/Header';
-import Footer from './navigation/Footer';
+import Header from '../navigation/Header/Header';
+import Footer from '../navigation/Footer/Footer';
 
 const LogIn: React.FC = () => {
     const [username, setUsername] = useState<string>('');

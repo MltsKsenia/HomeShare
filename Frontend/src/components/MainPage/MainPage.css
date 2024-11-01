@@ -1,0 +1,129 @@
+/* MainPage.css */
+.main-page {
+    height: 100vh;
+    color: #fff;
+}
+
+.page-container {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    flex-flow: column wrap;
+    justify-content: center;
+    margin: 0 0.5rem;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    width: 100%;
+    height: auto;
+}
+
+.main-button {
+    flex-shrink: 0;
+    padding: 0.5rem 2rem;
+    font-size: 1.5rem;
+    color: #4452a3;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    margin: 0.5rem 1rem;
+}
+
+.main-button:hover {
+    background-color: #4452a3;
+    color: #fff;
+}
+
+.main-button:active {
+    background-color: #2b3469;
+    color: #fff;
+}
+
+@media (min-width: 768px) {
+    .main-container h1 {
+        font-size: 2rem;
+    }
+
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: row nowrap;
+        width: 100%;
+        height: auto;
+    }
+
+    .page-container {
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main-container {
+        display: flex;
+        align-items: center;
+        flex-flow: column wrap;
+        justify-content: center;
+    }
+}
+
+.contact {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.contact button {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.contact button:hover {
+    background-color: #4452a3;
+    color: #fff;
+}
+
+.contact button:active {
+    background-color: #2b3469;
+    color: #fff;
+}
+
+.contact button,
+.contact button {
+    color: #4452a3;
+    transition: color 0.3s;
+}
+
+.contact button:hover .faGithub,
+.contact button:hover .faLinkedin {
+    color: #fff;
+}
+
+.contact button:active .faGithub,
+.contact button:active .faLinkedin {
+    color: #fff;
+}

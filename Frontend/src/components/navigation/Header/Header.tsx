@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { User } from '../../src/types/types';
+import { User } from '../../../types/types';
+import './Header.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandshakeAngle } from '@fortawesome/free-solid-svg-icons';
 
 const Header: React.FC = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -17,7 +20,7 @@ const Header: React.FC = () => {
     }, []);
 
     const handleHomeClick = () => {
-        navigate('/home');
+        navigate('/');
     };
 
     const handleProfileClick = () => {
@@ -27,6 +30,7 @@ const Header: React.FC = () => {
     return (
         <header>
             <button className="header-button" onClick={handleHomeClick}>
+                <FontAwesomeIcon icon={faHandshakeAngle} size="2xl" style={{ color: "#2b3469", }} />
                 <div className="header-text">
                     <h1>Home Share</h1>
                     <p>Share your items with your neighbours!</p>

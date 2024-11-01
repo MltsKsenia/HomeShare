@@ -1,0 +1,81 @@
+/* Footer Navigation */
+.bottom-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: #2b3469;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 10%;
+    max-width: auto;
+    margin: 0 auto;
+    height: 2.5rem;
+}
+
+.bottom-nav div {
+    max-width: 70vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+/* Navigation Buttons */
+.nav-button,
+.add-button {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.nav-button:hover,
+.add-button:hover {
+    background-color: #4452a3;
+}
+
+.nav-button:active,
+.add-button:active {
+    background-color: #2b3469;
+}
+
+.add-button {
+    font-size: 1.5rem;
+    border: none;
+}
+
+.add-button .fa-plus,
+.nav-button .fa-house,
+.nav-button .fa-folder-open,
+.nav-button .fa-shop,
+.nav-button .fa-bell {
+    color: #2b3469;
+    transition: color 0.3s;
+}
+
+.add-button:hover .fa-plus,
+.nav-button:hover .fa-house,
+.nav-button:hover .fa-folder-open,
+.nav-button:hover .fa-shop,
+.nav-button:hover .fa-bell {
+    color: #fff;
+}
+
+.add-button:active .fa-plus,
+.nav-button:active .fa-house,
+.nav-button:active .fa-folder-open,
+.nav-button:active .fa-shop,
+.nav-button:active .fa-bell {
+    color: #fff;
+}

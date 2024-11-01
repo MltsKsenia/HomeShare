@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Header from './navigation/Header';
-import Footer from './navigation/Footer';
+import Header from '../navigation/Header/Header';
+import Footer from '../navigation/Footer/Footer';
 
 const Register: React.FC = () => {
     const [formData, setFormData] = useState({

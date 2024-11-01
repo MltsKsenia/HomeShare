@@ -20,4 +20,7 @@ router.delete('/items/:id', itemController.deleteItem);
 // Search Item
 router.get('/items/search', itemController.searchItems);
 
+// Get all items by user ID
+router.get('/items/user/:user_id', itemController.getItemsByUserId);
+
 module.exports = router;
