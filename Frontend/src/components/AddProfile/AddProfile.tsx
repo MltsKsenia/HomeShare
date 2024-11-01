@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { ProfileFormData } from '../src/types/types';
-import Header from './navigation/Header';
-import Footer from './navigation/Footer';
+import { ProfileFormData } from '../../types/types';
+import Header from '../navigation/Header/Header';
+import Footer from '../navigation/Footer/Footer';
 
 const Profile: React.FC = () => {
     const [profileData, setProfileData] = useState<ProfileFormData>({

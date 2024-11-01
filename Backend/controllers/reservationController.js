@@ -1,23 +1,43 @@
-const knex = require('../config/db');
+const db = require('../config/db');
 
 // Create Reservation
 exports.createReservation = async (req, res) => {
+
+    console.log("Request body:", req.body);
+
     const { item_id, user_id, start_date, end_date } = req.body;
 
     try {
         // Looking for an owner_id
-        const item = await knex('items')
-            .select('user_id')
+        const item = await db('items')
+            .select('user_id', 'available_days')
             .where({ id: item_id })
             .first();
+
+        console.log("Item found:", item);
 
         if (!item) {
             return res.status(404).json({ error: 'Item not found' });
         }
 
+        const [availableStartDate, availableEndDate] = item.available_days || [];
+
+        if (!availableStartDate || !availableEndDate) {
+            return res.status(400).json({ error: 'Item not found' });
+        }
+
+        const isWithinAvailableRange =
+            new Date(start_date) >= new Date(availableStartDate) &&
+            new Date(end_date) <= new Date(availableEndDate);
+
+        if (!isWithinAvailableRange) {
+            return res.status(400).json({ error: 'Selected dates are not within the available range for this item.' });
+        }
+
+
         const owner_id = item.user_id; // owner_id = user_id from the items table
 
-        const [newReservation] = await knex('reservations')
+        const [newReservation] = await db('reservations')
             .insert({
                 item_id,
                 user_id,
@@ -30,6 +50,7 @@ exports.createReservation = async (req, res) => {
 
         res.status(201).json({ message: 'Reservation created successfully', reservation: newReservation });
     } catch (error) {
+        console.error('Error creating reservation:', error);
         res.status(500).json({ error: 'Failed to create reservation', details: error.message });
     }
 };
@@ -44,7 +65,7 @@ exports.updateReservationStatus = async (req, res) => {
     }
 
     try {
-        const [updatedReservation] = await knex('reservations')
+        const [updatedReservation] = await db('reservations')
             .where({ id: reservation_id })
             .update({
                 status
@@ -66,7 +87,7 @@ exports.deleteReservation = async (req, res) => {
     const { reservation_id } = req.params;
 
     try {
-        const deletedCount = await knex('reservations')
+        const deletedCount = await db('reservations')
             .where({ id: reservation_id })
             .del();
 
@@ -85,7 +106,7 @@ exports.getReservationsByUser = async (req, res) => {
     const { user_id } = req.params;
 
     try {
-        const reservations = await knex('reservations')
+        const reservations = await db('reservations')
             .where({ 'reservations.user_id': user_id })
             .join('items', 'reservations.item_id', 'items.id')
             .select(
@@ -111,7 +132,7 @@ exports.getReservationsByItemOwner = async (req, res) => {
     const { user_id } = req.params;
 
     try {
-        const reservations = await knex('reservations')
+        const reservations = await db('reservations')
             .join('items', 'reservations.item_id', 'items.id')
             .where('items.user_id', user_id)
             .select(
@@ -137,7 +158,7 @@ exports.getReservationById = async (req, res) => {
     const { reservation_id } = req.params;
 
     try {
-        const reservation = await knex('reservations').where({ id: reservation_id }).first();
+        const reservation = await db('reservations').where({ id: reservation_id }).first();
 
         if (!reservation) {
             return res.status(404).json({ error: 'Reservation not found' });

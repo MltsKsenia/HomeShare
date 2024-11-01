@@ -2,11 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Item } from '../src/types/types';
-import Header from './navigation/Header';
-import Footer from './navigation/Footer';
+import { Item } from '../../types/types';
+import Header from '../navigation/Header/Header';
+import Footer from '../navigation/Footer/Footer';
+import './Catalog.css';
 
-const Home: React.FC = () => {
+const Catalog: React.FC = () => {
     const [categories, setCategories] = useState<string[]>([]);
     const [items, setItems] = useState<Item[]>([]);
     const [filteredItems, setFilteredItems] = useState<Item[]>([]);
@@ -68,7 +69,6 @@ const Home: React.FC = () => {
     };
 
     const handleItemClick = (itemId: number) => {
-        localStorage.setItem('itemID', itemId.toString());
         navigate(`/item/${itemId}`);
     };
 
@@ -112,7 +112,6 @@ const Home: React.FC = () => {
                         <img
                             src={item.image_url}
                             alt={item.name}
-                            style={{ width: '80px', height: '80px' }}
                         />
                         <h2>{item.name}</h2>
                         <p>{item.description}</p>
@@ -126,4 +125,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default Catalog;

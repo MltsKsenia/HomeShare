@@ -8,55 +8,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding: 0 1rem;
-  background-color: #f8f9fa;
-  max-width: 100vw;
-}
-
-.header-button,
-.profile-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.header-button:hover,
-.profile-button:hover {
-  cursor: pointer;
-}
-
-.header-button h1 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
+html,
+body {
+  height: 100%;
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-header p {
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: 0.2rem;
-}
-
-.header-text {
+body {
+  background: linear-gradient(to bottom right, #8995d3, #2b3469);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-.profile-button {
-  margin-left: auto;
-}
-
-.profile-button img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
 }
 
 button {
@@ -66,201 +32,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-}
-
-.search-container {
-  display: flex;
-  align-items: center;
-  background-color: #f8f9fa;
-  padding: 0.5rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
-  max-width: 600px;
-}
-
-.search-container input {
-  background-color: #f8f9fa;
-  width: 100%;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  color: #333;
-}
-
-/* Categories */
-.categories {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  overflow-x: auto;
-}
-
-.category-button {
-  flex-shrink: 0;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  color: #333;
   background-color: #f1f1f1;
-  border: none;
-  border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.category-button:hover {
-  background-color: #4452a3;
-  color: #fff;
-}
-
-.category-button:active {
-  background-color: #2b3469;
-  color: #fff;
-}
-
-/* Product Grid */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  padding: 0 1rem;
-}
-
-@media (min-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    padding: 0 4rem;
-  }
-}
-
-.product-card {
-  background-color: #ffffff;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  cursor: pointer;
-}
-
-.product-card img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.product-card h2 {
-  font-size: 1rem;
-  color: #333;
-  margin: 0.5rem 0;
-}
-
-.product-card p {
-  font-size: 0.8rem;
-  color: #777;
-}
-
-/* Footer Navigation */
-.bottom-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  background-color: #2b3469;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-height: 10%;
-  max-width: auto;
-  margin: 0 auto;
-}
-
-.bottom-nav div {
-  max-width: 70vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-}
-
-/* Navigation Buttons */
-.nav-button,
-.add-button {
-  width: 3rem;
-  height: 3rem;
-  padding: 0.5rem;
-  border-radius: 50%;
-  background-color: #f1f1f1;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.nav-button:hover,
-.add-button:hover {
-  background-color: #4452a3;
-}
-
-.nav-button:active,
-.add-button:active {
-  background-color: #2b3469;
-}
-
-.add-button {
-  font-size: 1.5rem;
-  border: none;
-}
-
-/* ItemCard.tsx components */
-.card {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 20px;
-  margin: 20px;
-}
-
-.card img {
-  grid-column: 1 / 2;
-  grid-row: 1 / 6;
-  max-width: 100%;
-  border-radius: 8px;
-}
-
-.card h3 {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-.card p {
-  grid-column: 2 / 3;
-  grid-row: auto;
-  margin: 5px 0;
-}
-
-.profile-info {
-  grid-column: 2 / 3;
-  grid-row: 4 / 5;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.date-picker-container {
-  grid-column: 2 / 3;
-  grid-row: 5 / 6;
-  padding-top: 10px;
-}
-
-.profile-info img {
-  width: 34px;
-  height: 34px;
 }

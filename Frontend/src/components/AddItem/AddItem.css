@@ -1,0 +1,88 @@
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column wrap;
+}
+
+form input {
+    background-color: #f8f9fa;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+}
+
+form textarea {
+    background-color: #f8f9fa;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    flex-shrink: 0;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #333;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.custom-file-upload:hover {
+    background-color: #4452a3;
+}
+
+.custom-file-upload:active {
+    background-color: #2b3469;
+}
+
+.add-item-button {
+    flex-shrink: 0;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #333;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-item-button:hover {
+    background-color: #4452a3;
+    color: #fff;
+}
+
+.add-item-button:active {
+    background-color: #2b3469;
+    color: #fff;
+}
+
+.react-datepicker__input-container input {
+    background-color: #f8f9fa;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+}
+
+.react-datepicker__day-name {
+    margin: 1rem 0.2rem 0.2rem 0.2rem;
+}

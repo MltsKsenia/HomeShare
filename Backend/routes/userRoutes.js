@@ -8,11 +8,17 @@ router.post('/register', userController.register);
 // Log In
 router.post('/login', userController.login);
 
+// Log Out
+router.post('/logout', userController.logoutUser);
+
 // Get User
 router.get('/user/:id', userController.getUser);
 
-// Update Profile
+// Update User Data
 router.patch('/users/:userId', userController.updateUser);
+
+// Update Password
+router.put('/user/:userId/password', userController.updatePassword);
 
 // Delete Profile
 router.delete('/users/:userId', userController.deleteUser);
@@ -21,7 +27,7 @@ router.delete('/users/:userId', userController.deleteUser);
 router.post('/profile', userController.createUserProfile);
 
 // Update Profile Information
-router.put('/profile/:user_id', userController.updateUserProfile);
+router.put('/user/:userId/profile', userController.updateUserProfile);
 
 // Get User Profile Info
 router.get('/user/profile/:id', userController.getUserProfile);
