@@ -98,25 +98,32 @@ const ItemCard: React.FC = () => {
     if (!itemData) return <p>Loading...</p>;
 
     return (
-        <div className="item-card">
+        <div>
             <Header />
-            {/* Item Data */}
             <div className='display'>
                 <div className='card'>
-                    {itemData.image_url && <img src={itemData.image_url} alt={itemData.name} />}
-                    <h3>{itemData.name}</h3>
-                    <p>{itemData.description}</p>
-                    <p>{itemData.category}</p>
-
-                    {/* Profile Data */}
+                    {itemData.image_url && <img className="item-img" src={itemData.image_url} alt={itemData.name} />}
+                    <div className="info">
+                        <h3>{itemData.name}</h3>
+                        <p>{itemData.description}</p>
+                        <p>{itemData.category}</p>
+                        {isOwner && (
+                            <div className="owner-controls">
+                                <button className="edit-button" onClick={handleEdit}>Edit Item</button>
+                                <button className="delete-button" onClick={handleDelete}>Delete Item</button>
+                            </div>
+                        )}
+                    </div>
                     {profileData && (
-                        <div className="profile-info">
-                            <h4>Posted by: {profileData.full_name}</h4>
-                            <p>Phone: {profileData.phone_number}</p>
-                            <p>Address: {profileData.address}</p>
+                        <div className="profile-info-card">
                             {profileData.profile_image_url && (
                                 <img src={profileData.profile_image_url} alt="Profile" />
                             )}
+                            <ul>
+                                <li>Posted by: {profileData.full_name}</li>
+                                <li>Phone: {profileData.phone_number}</li>
+                                <li>Address: {profileData.address}</li>
+                            </ul>
                         </div>
                     )}
 
@@ -149,13 +156,6 @@ const ItemCard: React.FC = () => {
                         {error && <p className="error">{error}</p>}
                         {success && <p className="success">{success}</p>}
                     </div>
-                    {/* Edit and Delete Buttons - видим только, если текущий пользователь является создателем */}
-                    {isOwner && (
-                        <div className="owner-controls">
-                            <button onClick={handleEdit}>Edit Item</button>
-                            <button onClick={handleDelete}>Delete Item</button>
-                        </div>
-                    )}
                 </div>
             </div>
             <Footer />

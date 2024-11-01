@@ -43,6 +43,9 @@ export interface PasswordUpdateData {
 
 export interface Order {
     id: number;
+    item_id: number;
     item_name: string;
     status: string;
+    order_days: string[];
+    item_image_url: string;
 }

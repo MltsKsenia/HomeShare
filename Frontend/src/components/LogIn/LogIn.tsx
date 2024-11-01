@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../navigation/Header/Header';
 import Footer from '../navigation/Footer/Footer';
+import './LogIn.css'
 
 const LogIn: React.FC = () => {
     const [username, setUsername] = useState<string>('');
@@ -38,34 +39,33 @@ const LogIn: React.FC = () => {
     };
 
     return (
-        <div className="login-container">
-            {/* Header */}
-            <Header />
-            <h2>Log In</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">Log In</button>
-            </form>
-
-            {/* Footer */}
+        <div><Header />
+            <div className="login-container">
+                <form onSubmit={handleSubmit}>
+                    <h2>Log In</h2>
+                    <div>
+                        <label></label>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    <button className="submit-button" type="submit">Log In</button>
+                </form>
+            </div>
             <Footer />
         </div>
     );

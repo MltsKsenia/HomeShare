@@ -1,0 +1,184 @@
+.my-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.my-profile-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+    padding: 1rem;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.basic-info,
+.change-password,
+.profile-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 20rem;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    margin: 0.5rem 1rem;
+}
+
+.basic-info h3,
+.change-password h3,
+.profile-info h3 {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.basic-info input,
+.change-password input,
+.profile-info input {
+    width: auto;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.basic-info button,
+.change-password button,
+.profile-info button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: #2b3469;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.basic-info button:hover,
+.change-password button:hover,
+.profile-info button:hover {
+    background-color: #4452a3;
+    color: #f1f1f1;
+}
+
+.basic-info button:active,
+.change-password button:active,
+.profile-info button:active {
+    background-color: #2b3469;
+    color: #f1f1f1;
+}
+
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-file-upload {
+    padding: 0.75rem 1.5rem;
+    color: #4452a3;
+    font-weight: bold;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.custom-file-upload:hover {
+    background-color: #4452a3;
+    color: #f1f1f1;
+}
+
+.custom-file-upload:active {
+    background-color: #2b3469;
+    color: #f1f1f1;
+}
+
+.profile-thumbnail {
+    width: 5rem !important;
+    height: 5rem !important;
+    border-radius: 10px;
+    margin: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.button-logout {
+    flex-shrink: 0;
+    padding: 0.5rem 2rem;
+    font-size: rem;
+    color: #2b3469;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    margin: 0.25rem 0.5rem;
+}
+
+.button-logout:hover {
+    background-color: #4452a3;
+    color: #fff;
+}
+
+.button-logout:active {
+    background-color: #2b3469;
+    color: #fff;
+}
+
+.button-delete {
+    flex-shrink: 0;
+    padding: 0.5rem 2rem;
+    font-size: rem;
+    color: #b23939;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    margin: 0.25rem 0.5rem;
+}
+
+.button-delete:hover {
+    background-color: #b23939;
+    color: #fff;
+}
+
+.button-delete:active {
+    background-color: #733232;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .my-profile {
+        padding: 0.5rem;
+    }
+
+    .basic-info,
+    .change-password,
+    .profile-info {
+        padding: 0.5rem;
+    }
+}

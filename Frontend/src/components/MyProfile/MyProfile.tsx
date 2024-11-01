@@ -60,7 +60,8 @@ const MyProfile: React.FC = () => {
 
     const getUserProfile = async (userId: string) => {
         try {
-            const response = await axios.get<ProfileFormData>(`http://localhost:3000/api/user/${userId}/profile`);
+            const response = await axios.get<ProfileFormData>(`http://localhost:3000/api/user/profile/${userId}`);
+            console.log('Profile data:', response.data);
             setUserProfile(response.data);
         } catch (error) {
             console.error('Failed to retrieve user profile:', error);
@@ -147,105 +148,111 @@ const MyProfile: React.FC = () => {
     };
 
     return (
-        <div className='my-profile'>
-            {/* Header */}
+        <div>
             <Header />
-            <h2>My Profile</h2>
+            <div className='my-profile'>
+                <h2>My Profile</h2>
+                <div className='my-profile-card'>
+                    <div>
+                        <div className='basic-info'>
+                            <h3>Basic Information</h3>
+                            {user && (
+                                <>
+                                    <input
+                                        type="text"
+                                        placeholder="Username"
+                                        value={user.username}
+                                        onChange={(e) => setUser({ ...user, username: e.target.value })}
+                                    />
+                                    <input
+                                        type="email"
+                                        placeholder="Email"
+                                        value={user.email}
+                                        onChange={(e) => setUser({ ...user, email: e.target.value })}
+                                    />
+                                    <button onClick={handleUpdateUser}>Update Basic Info</button>
+                                </>
+                            )}
+                        </div>
 
-            {/* Display User Basic Info */}
-            <div className='basic-info'>
-                <h3>Basic Information</h3>
-                {user && (
-                    <>
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            value={user.username}
-                            onChange={(e) => setUser({ ...user, username: e.target.value })}
-                        />
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={user.email}
-                            onChange={(e) => setUser({ ...user, email: e.target.value })}
-                        />
-                        <button onClick={handleUpdateUser}>Update Basic Info</button>
-                    </>
-                )}
-            </div>
-
-            {/* Change Password */}
-            <div className='change-password'>
-                <h3>Change Password</h3>
-                <input
-                    type="password"
-                    placeholder="Current Password"
-                    value={passwordData.currentPassword}
-                    onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
-                />
-                <input
-                    type="password"
-                    placeholder="New Password"
-                    value={passwordData.newPassword}
-                    onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
-                />
-                <button onClick={handlePasswordChange}>Change Password</button>
-            </div>
-
-            {/* Display User Profile Info */}
-            <div className='profile-info'>
-                <h3>Profile Information</h3>
-                <input
-                    type="text"
-                    placeholder="Phone Number"
-                    value={userProfile.phone_number}
-                    onChange={(e) => setUserProfile({ ...userProfile, phone_number: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Full Name"
-                    value={userProfile.full_name}
-                    onChange={(e) => setUserProfile({ ...userProfile, full_name: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Address"
-                    value={userProfile.address}
-                    onChange={(e) => setUserProfile({ ...userProfile, address: e.target.value })}
-                />
-                <div className="file-upload">
-                    <label htmlFor="fileInput" className="custom-file-upload">
-                        Upload Image
-                    </label>
-                    <input
-                        id="fileInput"
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                            if (e.target.files && e.target.files[0]) {
-                                uploadImage(e.target.files[0]);
-                            }
-                        }}
-                    />
+                        <div className='change-password'>
+                            <h3>Change Password</h3>
+                            <input
+                                type="password"
+                                placeholder="Current Password"
+                                value={passwordData.currentPassword}
+                                onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
+                            />
+                            <input
+                                type="password"
+                                placeholder="New Password"
+                                value={passwordData.newPassword}
+                                onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
+                            />
+                            <button onClick={handlePasswordChange}>Change Password</button>
+                        </div>
+                    </div>
+                    <div className='profile-info'>
+                        <h3>Profile Information</h3>
+                        {userProfile && (
+                            <>
+                                <input
+                                    type="text"
+                                    placeholder="Phone Number"
+                                    value={userProfile.phone_number}
+                                    onChange={(e) => setUserProfile({ ...userProfile, phone_number: e.target.value })}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Full Name"
+                                    value={userProfile.full_name}
+                                    onChange={(e) => setUserProfile({ ...userProfile, full_name: e.target.value })}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Address"
+                                    value={userProfile.address}
+                                    onChange={(e) => setUserProfile({ ...userProfile, address: e.target.value })}
+                                />
+                                <div className="file-upload">
+                                    <label htmlFor="fileInput" className="custom-file-upload">
+                                        Upload Image
+                                    </label>
+                                    <input
+                                        id="fileInput"
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={(e) => {
+                                            if (e.target.files && e.target.files[0]) {
+                                                uploadImage(e.target.files[0]);
+                                            }
+                                        }}
+                                    />
+                                    {userProfile.profile_image_url && (
+                                        <img
+                                            src={userProfile.profile_image_url}
+                                            alt="Profile Thumbnail"
+                                            className="profile-thumbnail"
+                                        />
+                                    )}
+                                </div>
+                                <p>Date of Birth:</p>
+                                <input
+                                    type="date"
+                                    placeholder="Date of Birth"
+                                    value={userProfile.date_of_birth}
+                                    onChange={(e) => setUserProfile({ ...userProfile, date_of_birth: e.target.value })}
+                                />
+                                <button onClick={handleUpdateUserProfile}>Update Profile Info</button>
+                            </>
+                        )}
+                    </div>
                 </div>
-                <input
-                    type="date"
-                    placeholder="Date of Birth"
-                    value={userProfile.date_of_birth}
-                    onChange={(e) => setUserProfile({ ...userProfile, date_of_birth: e.target.value })}
-                />
-                <button onClick={handleUpdateUserProfile}>Update Profile Info</button>
+                <div className='profile-buttons'>
+                    <button className="button-logout" onClick={handleLogout}>Log Out</button>
+                    <button className="button-delete" onClick={handleDeleteUser}>Delete Profile</button>
+                </div>
             </div>
-
-            <div className='profile-buttons'>
-                <button onClick={handleDeleteUser} style={{ marginTop: '10px', backgroundColor: 'red', color: 'white' }}>
-                    Delete Profile
-                </button>
-                <button onClick={handleLogout} style={{ marginTop: '10px', backgroundColor: 'blue', color: 'white' }}>
-                    Log Out
-                </button>
-            </div>
-            {/* Footer */}
             <Footer />
         </div>
     );

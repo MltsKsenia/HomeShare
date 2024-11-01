@@ -35,3 +35,7 @@ button {
   background-color: #f1f1f1;
   cursor: pointer;
 }
+
+ul li {
+  list-style: none;
+}

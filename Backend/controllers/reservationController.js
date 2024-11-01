@@ -114,18 +114,27 @@ exports.getReservationsByUser = async (req, res) => {
                 'items.name as item_name',
                 'items.description as item_description',
                 'items.category as item_category',
-                'items.user_id as owner_id'
+                'items.user_id as owner_id',
+                'items.image_url as item_image_url',
+                'reservations.start_date',
+                'reservations.end_date'
             );
 
-        if (reservations.length === 0) {
-            return res.status(404).json({ error: 'No reservations found for this user' });
-        }
+        const formattedReservations = reservations.map(reservation => ({
+            ...reservation,
+            order_days: [
+                new Date(reservation.start_date).toISOString().split('T')[0],
+                new Date(reservation.end_date).toISOString().split('T')[0]
+            ],
+        }));
 
-        res.status(200).json({ reservations });
+        res.status(200).json({ reservations: formattedReservations });
     } catch (error) {
+        console.error("Error in getReservationsByUser:", error.message, error.stack);
         res.status(500).json({ error: 'Failed to fetch reservations', details: error.message });
     }
 };
+
 
 // Get All Reservations By Item Owner
 exports.getReservationsByItemOwner = async (req, res) => {
@@ -140,15 +149,23 @@ exports.getReservationsByItemOwner = async (req, res) => {
                 'items.name as item_name',
                 'items.description as item_description',
                 'items.category as item_category',
-                'items.user_id as owner_id'
+                'items.user_id as owner_id',
+                'items.image_url as item_image_url',
+                'reservations.start_date',
+                'reservations.end_date'
             );
 
-        if (reservations.length === 0) {
-            return res.status(404).json({ error: 'No reservations found for items owned by this user' });
-        }
+        const formattedReservations = reservations.map(reservation => ({
+            ...reservation,
+            order_days: [
+                new Date(reservation.start_date).toISOString().split('T')[0],
+                new Date(reservation.end_date).toISOString().split('T')[0]
+            ],
+        }));
 
-        res.status(200).json({ reservations });
+        res.status(200).json({ reservations: formattedReservations });
     } catch (error) {
+        console.error("Error fetching reservations by user:", error.message);
         res.status(500).json({ error: 'Failed to fetch reservations', details: error.message });
     }
 };
