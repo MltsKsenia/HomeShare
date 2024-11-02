@@ -26,7 +26,7 @@ const Register: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/api/register', formData);
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/register`, formData);
             if (response.data.userId && response.data.userId.id) {
                 localStorage.setItem('userId', response.data.userId.id.toString());
             } else {

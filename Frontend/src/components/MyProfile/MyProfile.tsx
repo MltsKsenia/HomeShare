@@ -136,7 +136,7 @@ const MyProfile: React.FC = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/logout`);
+            const response = await axios.post(`/api/logout`);
             alert(response.data.message);
             localStorage.removeItem('userId');
             localStorage.removeItem('token');
