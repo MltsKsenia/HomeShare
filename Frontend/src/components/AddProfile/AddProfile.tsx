@@ -42,7 +42,7 @@ const Profile: React.FC = () => {
             await axios.post('http://localhost:3000/api/profile', { user_id: userId, ...profileData });
             setSuccessMessage('Profile updated successfully');
             setError(null);
-            navigate('/home');
+            navigate('/catalog');
         } catch (err: any) {
             setError(err.response?.data?.error || err.message || 'An error occurred while updating profile');
         }
@@ -51,7 +51,6 @@ const Profile: React.FC = () => {
 
     return (
         <div>
-            {/* Header */}
             <Header />
             <h3>Optional Profile Information</h3>
             <form onSubmit={handleProfileSubmit}>
@@ -109,8 +108,6 @@ const Profile: React.FC = () => {
                 {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
                 <button type="submit">Save Profile</button>
             </form>
-
-            {/* Footer */}
             <Footer />
         </div>
     );
