@@ -153,31 +153,6 @@ exports.deleteUser = async (req, res) => {
     }
 };
 
-// Add User Profile Info
-exports.createUserProfile = async (req, res) => {
-    let { user_id, phone_number, full_name, address, profile_image_url, date_of_birth } = req.body;
-    try {
-        user_id = parseInt(user_id, 10);
-        if (isNaN(user_id)) {
-            return res.status(400).json({ error: 'Invalid user ID' });
-        }
-        await db('users')
-            .where({ id: user_id })
-            .update({
-                phone_number,
-                full_name,
-                address,
-                profile_image_url,
-                date_of_birth
-            });
-
-        res.status(200).json({ message: 'User profile created successfully' });
-    } catch (error) {
-        console.error('Error creating user profile:', error);
-        res.status(500).json({ error: 'Failed to create user profile', details: error.message });
-    }
-};
-
 // Update User Profile Info
 exports.updateUserProfile = async (req, res) => {
     const { userId } = req.params;
