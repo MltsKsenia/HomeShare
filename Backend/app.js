@@ -5,6 +5,17 @@ const app = express();
 const cors = require('cors');
 const path = require('path');
 const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+const { Pool } = require('pg');
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+
+redisClient.connect().catch(console.error);
 
 const userRoutes = require('./routes/userRoutes');
 const itemRoutes = require('./routes/itemRoutes');
@@ -14,12 +25,18 @@ const reservationRoutes = require('./routes/reservationRoutes');
 app.use(cors());
 app.use(express.json());
 app.use(session({
+    store: new pgSession({
+        pool: pool,
+        tableName: 'session'
+    }),
     secret: process.env.JWT_SECRET,
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === 'production' }
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 1000 * 60 * 60 * 24
+    }
 }));
-
 // API routes
 app.use('/api', userRoutes);
 app.use('/api', itemRoutes);
