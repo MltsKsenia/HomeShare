@@ -2,6 +2,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
+const { use } = require('../app');
 
 const jwtSecret = process.env.JWT_SECRET;
 const jwtExpiresIn = process.env.JWT_EXPIRES_IN;
@@ -28,7 +29,7 @@ exports.login = async (req, res) => {
 
     try {
         const user = await db('users').where({ username }).first();
-
+        console.log(user)
         if (user && await bcrypt.compare(password, user.password)) {
             const token = jwt.sign({ id: user.id, username: user.username }, jwtSecret, { expiresIn: jwtExpiresIn });
             res.json({ token });
