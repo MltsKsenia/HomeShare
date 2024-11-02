@@ -15,8 +15,6 @@ const pool = new Pool({
     }
 });
 
-redisClient.connect().catch(console.error);
-
 const userRoutes = require('./routes/userRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const reservationRoutes = require('./routes/reservationRoutes');
