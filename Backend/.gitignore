@@ -87,21 +87,3 @@ node_modules/
 # dotenv environment variables file
 .env
 .env.test
-
-# parcel-bundler cache (https://parceljs.org/)
-.cache/
-
-# Serverless directories
-.serverless/
-
-# FuseBox cache
-.fusebox/
-
-# TypeScript
-*.tsbuildinfo
-
-# Optional eslint cache
-.eslintcache
-
-# Optional stylelint cache
-.stylelintcache
