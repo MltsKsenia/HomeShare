@@ -28,7 +28,7 @@ const LogIn: React.FC = () => {
 
                 console.log('Saved userId in localStorage:', localStorage.getItem('userId'));
 
-                navigate('/home');
+                navigate('/catalog');
             } else {
                 setError('Invalid username or password');
             }

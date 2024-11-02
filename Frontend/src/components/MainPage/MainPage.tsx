@@ -28,7 +28,6 @@ const MainPage: React.FC = () => {
 
     return (
         <div className="main-page">
-            {/* Header */}
             <Header />
             <div className='page-container'>
                 <div className='main-container'>
@@ -46,7 +45,6 @@ const MainPage: React.FC = () => {
                     </div>
                 </div>
             </div>
-            {/* Footer */}
             <Footer />
         </div>
     );

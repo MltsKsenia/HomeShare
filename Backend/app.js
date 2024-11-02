@@ -17,7 +17,7 @@ app.use(session({
     secret: process.env.JWT_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
 
 // API routes
@@ -26,11 +26,11 @@ app.use('/api', itemRoutes);
 app.use('/api', reservationRoutes);
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '..', 'Frontend', 'dist')));
+app.use(express.static(path.resolve(__dirname, '../Frontend/dist')));
 
 // This handles any requests that don't match the ones above, returning the React app
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'Frontend', 'dist', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../Frontend/dist/index.html'));
 });
 
 module.exports = app;
