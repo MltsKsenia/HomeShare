@@ -237,10 +237,11 @@ const MyProfile: React.FC = () => {
                                     )}
                                 </div>
                                 <p>Date of Birth:</p>
+                                <p>Date of Birth:</p>
                                 <input
                                     type="date"
                                     placeholder="Date of Birth"
-                                    value={userProfile.date_of_birth}
+                                    value={userProfile.date_of_birth ? userProfile.date_of_birth.substring(0, 10) : ''}
                                     onChange={(e) => setUserProfile({ ...userProfile, date_of_birth: e.target.value })}
                                 />
                                 <button onClick={handleUpdateUserProfile}>Update Profile Info</button>

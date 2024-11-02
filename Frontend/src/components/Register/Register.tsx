@@ -35,7 +35,7 @@ const Register: React.FC = () => {
 
             setSuccessMessage('User registered successfully');
             setError(null);
-            navigate('/add-profile');
+            navigate('/my-profile');
         } catch (err: any) {
             setError(err.response?.data?.error || 'An error occurred');
         }
