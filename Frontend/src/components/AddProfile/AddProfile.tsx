@@ -39,7 +39,7 @@ const Profile: React.FC = () => {
                 throw new Error('Invalid user ID format. Please register again.');
             }
 
-            await axios.post('http://localhost:3000/api/profile', { user_id: userId, ...profileData });
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/profile`, { user_id: userId, ...profileData });
             setSuccessMessage('Profile updated successfully');
             setError(null);
             navigate('/catalog');

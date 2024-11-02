@@ -56,7 +56,7 @@ const AddItem: React.FC = () => {
                 available_days: availableDays
             });
 
-            await axios.post('http://localhost:3000/api/items', {
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/items`, {
                 user_id,
                 name,
                 description,

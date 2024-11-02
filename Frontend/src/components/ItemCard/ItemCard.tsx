@@ -25,12 +25,12 @@ const ItemCard: React.FC = () => {
 
     useEffect(() => {
         if (itemID) {
-            axios.get<ItemCardData>(`http://localhost:3000/api/items/${itemID}`)
+            axios.get<ItemCardData>(`${import.meta.env.VITE_BACKEND_URL}/api/items/${itemID}`)
                 .then(response => {
                     setItemData(response.data);
                     setAvailableDays(response.data.available_days.map((day: string) => new Date(day)) as [Date, Date]);
                     if (response.data.user_id) {
-                        return axios.get<ProfileFormData>(`http://localhost:3000/api/user/profile/${response.data.user_id}`);
+                        return axios.get<ProfileFormData>(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile/${response.data.user_id}`);
                     } else {
                         console.warn("User ID not found in item data.");
                         return Promise.reject('User ID not found');
@@ -60,7 +60,7 @@ const ItemCard: React.FC = () => {
         console.log("Reservation data being sent:", reservationData);
 
         try {
-            await axios.post('http://localhost:3000/api/reservations', reservationData);
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/reservations`, reservationData);
             setSuccess("Reservation request sent successfully!");
             setError(null);
         } catch (error) {
@@ -76,7 +76,7 @@ const ItemCard: React.FC = () => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:3000/api/items/${itemID}`);
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/items/${itemID}`);
             setSuccess("Item deleted successfully!");
             navigate('/home');
         } catch (error) {

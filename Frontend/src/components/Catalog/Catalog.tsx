@@ -16,7 +16,7 @@ const Catalog: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/items')
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/items`)
             .then(response => {
                 const itemsData = response.data;
 

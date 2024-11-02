@@ -34,7 +34,7 @@ const EditItem: React.FC = () => {
 
     const fetchItemData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/items/${id}`);
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/items/${id}`);
             console.log("Response from server:", response.data);
             console.log('ID for update:', id);
             const item = response.data;
@@ -90,7 +90,7 @@ const EditItem: React.FC = () => {
                 available_days: availableDays.length > 0 ? availableDays : undefined
             });
 
-            await axios.patch(`http://localhost:3000/api/items/${id}`, {
+            await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/items/${id}`, {
                 name,
                 description,
                 category,
@@ -98,7 +98,7 @@ const EditItem: React.FC = () => {
                 available_days: availableDays.length > 0 ? availableDays : undefined
             });
 
-            const response = await axios.patch(`http://localhost:3000/api/items/${id}`, {
+            const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/items/${id}`, {
                 name,
                 description,
                 category,
@@ -117,7 +117,6 @@ const EditItem: React.FC = () => {
 
     return (
         <div className="add-item">
-            {/* Header */}
             <Header />
             <form onSubmit={handleSubmit}>
                 <h2>Edit Item</h2>
@@ -189,8 +188,6 @@ const EditItem: React.FC = () => {
                 </div>
                 <button className='add-item-button' type="submit">Update Item</button>
             </form>
-
-            {/* Footer */}
             <Footer />
         </div>
     );
