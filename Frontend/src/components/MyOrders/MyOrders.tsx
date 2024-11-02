@@ -50,10 +50,10 @@ const MyOrders: React.FC = () => {
 
     const handleApprove = async (reservationId: number) => {
         try {
-            await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/reservations/${reservationId}/status`, {
+            const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/reservations/${reservationId}/status`, {
                 status: 'approved',
             });
-            window.location.reload();
+            console.log("Response:", response);
         } catch (error) {
             console.error("Error updating status:", error);
         }
@@ -64,7 +64,6 @@ const MyOrders: React.FC = () => {
             await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/reservations/${reservationId}/status`, {
                 status: 'declined',
             });
-            window.location.reload();
         } catch (error) {
             console.error("Error updating status:", error);
         }
