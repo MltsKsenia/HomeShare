@@ -2,7 +2,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Register from './components/Register/Register';
-import Profile from './components/AddProfile/AddProfile';
 import Catalog from './components/Catalog/Catalog';
 import LogIn from './components/LogIn/LogIn';
 import AddItem from './components/AddItem/AddItem';
@@ -20,7 +19,6 @@ const App: React.FC = () => {
       <Route path="/login" element={<LogIn />} />
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/add-profile" element={<Profile />} />
       <Route path="/my-profile" element={<MyProfile />} />
       <Route path="/add-item" element={<AddItem />} />
       <Route path="/item/:itemID" element={<ItemCard />} />
