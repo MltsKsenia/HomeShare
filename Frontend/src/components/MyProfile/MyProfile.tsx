@@ -51,7 +51,7 @@ const MyProfile: React.FC = () => {
 
     const getUser = async (userId: string) => {
         try {
-            const response = await axios.get<User>(`http://localhost:3000/api/user/${userId}`);
+            const response = await axios.get<User>(`${import.meta.env.VITE_BACKEND_URL}/api/user/${userId}`);
             setUser(response.data);
         } catch (error) {
             console.error('Failed to retrieve user data:', error);
@@ -60,7 +60,7 @@ const MyProfile: React.FC = () => {
 
     const getUserProfile = async (userId: string) => {
         try {
-            const response = await axios.get<ProfileFormData>(`http://localhost:3000/api/user/profile/${userId}`);
+            const response = await axios.get<ProfileFormData>(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile/${userId}`);
             console.log('Profile data:', response.data);
             setUserProfile(response.data);
         } catch (error) {
@@ -76,7 +76,7 @@ const MyProfile: React.FC = () => {
             }
             console.log("Updating user:", user);
             try {
-                const response = await axios.patch(`http://localhost:3000/api/users/${user.id}`, {
+                const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`, {
                     username: user.username,
                     email: user.email,
                 });
@@ -94,7 +94,7 @@ const MyProfile: React.FC = () => {
         if (userId) {
             console.log("Updating user profile for user ID:", userId);
             try {
-                await axios.put(`http://localhost:3000/api/user/${userId}/profile`, userProfile);
+                await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/user/${userId}/profile`, userProfile);
                 alert('User profile updated successfully');
             } catch (error) {
                 console.error('Failed to update user profile:', error);
@@ -107,7 +107,7 @@ const MyProfile: React.FC = () => {
         const userId = localStorage.getItem('userId');
         if (userId) {
             try {
-                await axios.put(`http://localhost:3000/api/user/${userId}/password`, passwordData);
+                await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/user/${userId}/password`, passwordData);
                 alert('Password updated successfully');
                 setPasswordData({ currentPassword: '', newPassword: '' });
             } catch (error) {
@@ -123,7 +123,7 @@ const MyProfile: React.FC = () => {
             const confirmDelete = window.confirm("Are you sure you want to delete your profile? This action cannot be undone.");
             if (confirmDelete) {
                 try {
-                    const response = await axios.delete(`http://localhost:3000/api/users/${userId}`);
+                    const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`);
                     alert(response.data.message);
                     navigate('/');
                 } catch (error) {
@@ -136,7 +136,7 @@ const MyProfile: React.FC = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post('http://localhost:3000/api/logout');
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/logout`);
             alert(response.data.message);
             localStorage.removeItem('userId');
             localStorage.removeItem('token');

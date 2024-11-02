@@ -13,7 +13,7 @@ const Header: React.FC = () => {
     useEffect(() => {
         const userId = localStorage.getItem('userId');
         if (userId) {
-            axios.get(`http://localhost:3000/api/user/${userId}`)
+            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/${userId}`)
                 .then(response => setUser(response.data))
                 .catch(error => console.error("Error while retrieving user data:", error));
         }

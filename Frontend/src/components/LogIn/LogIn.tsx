@@ -15,7 +15,7 @@ const LogIn: React.FC = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('/api/login', { username, password });
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/login`, { username, password });
 
             if (response.status === 200 && response.data.token) {
                 const { token } = response.data;

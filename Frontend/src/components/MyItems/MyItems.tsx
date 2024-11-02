@@ -19,7 +19,7 @@ const MyItems: React.FC = () => {
                 return;
             }
             try {
-                const response = await axios.get(`http://localhost:3000/api/items/user/${user_id}`);
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/items/user/${user_id}`);
                 setItems(response.data.items);
             } catch (error) {
                 console.error("Error fetching items:", error);
@@ -41,7 +41,7 @@ const MyItems: React.FC = () => {
                 <div className="product-grid">
                     {items && items.length > 0 ? (
                         items.map((item) => (
-                            <div key={item.id} className="item-card" onClick={() => handleItemClick(item.id)}> {/* Добавляем обработчик клика */}
+                            <div key={item.id} className="item-card" onClick={() => handleItemClick(item.id)}>
                                 <img src={item.image_url} alt={item.name} className="item-image" />
                                 <div className="item-info">
                                     <h3>{item.name}</h3>

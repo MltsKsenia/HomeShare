@@ -14,8 +14,8 @@ const MyOrders: React.FC = () => {
 
     const fetchUserOrders = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/reservations/user/${userId}`);
-            console.log("User Orders Response:", response.data); // Логирование ответа
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/reservations/user/${userId}`);
+            console.log("User Orders Response:", response.data);
             setUserOrders(response.data.reservations);
         } catch (error) {
             console.error("Error fetching user orders:", error);
@@ -23,7 +23,7 @@ const MyOrders: React.FC = () => {
     };
     const fetchItemOrders = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/reservations/owner/${userId}`);
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/reservations/owner/${userId}`);
             setItemOrders(response.data.reservations);
         } catch (error) {
             console.error("Error fetching item orders:", error);
@@ -32,7 +32,7 @@ const MyOrders: React.FC = () => {
 
     const fetchAllReservations = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/reservations/user/${userId}`);
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/reservations/user/${userId}`);
             console.log("User reservations:", response.data.reservations);
         } catch (error) {
             console.error("Error fetching reservations:", error);
@@ -41,7 +41,7 @@ const MyOrders: React.FC = () => {
 
     const handleDeleteOrder = async (reservationId: number) => {
         try {
-            await axios.delete(`http://localhost:3000/api/reservations/${reservationId}`);
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/reservations/${reservationId}`);
             setUserOrders(userOrders.filter(order => order.id !== reservationId));
         } catch (error) {
             console.error("Error deleting order:", error);
@@ -50,7 +50,7 @@ const MyOrders: React.FC = () => {
 
     const handleApprove = async (reservationId: number) => {
         try {
-            await axios.patch(`http://localhost:3000/api/reservations/${reservationId}/status`, {
+            await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/reservations/${reservationId}/status`, {
                 status: 'approved',
             });
             window.location.reload();
@@ -61,7 +61,7 @@ const MyOrders: React.FC = () => {
 
     const handleDecline = async (reservationId: number) => {
         try {
-            await axios.patch(`http://localhost:3000/api/reservations/${reservationId}/status`, {
+            await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/reservations/${reservationId}/status`, {
                 status: 'declined',
             });
             window.location.reload();
