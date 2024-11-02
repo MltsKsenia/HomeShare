@@ -26,13 +26,10 @@ app.use('/api', itemRoutes);
 app.use('/api', reservationRoutes);
 
 // Serve static files from the React app
-console.log('Serving static files from:', path.resolve(__dirname, '..', 'Frontend', 'dist'));
 app.use(express.static(path.resolve(__dirname, '..', 'Frontend', 'dist')));
 
 // This handles any requests that don't match the ones above, returning the React app
 app.get('*', (req, res) => {
-    console.log('Request for:', req.originalUrl);
-    console.log('Sending file:', path.resolve(__dirname, '..', 'Frontend', 'dist', 'index.html'));
     res.sendFile(path.resolve(__dirname, '..', 'Frontend', 'dist', 'index.html'));
 });
 
