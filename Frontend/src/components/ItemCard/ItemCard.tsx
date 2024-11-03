@@ -78,7 +78,7 @@ const ItemCard: React.FC = () => {
         try {
             await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/items/${itemID}`);
             setSuccess("Item deleted successfully!");
-            navigate('/home');
+            navigate('/catalog');
         } catch (error) {
             console.error("Error deleting item:", error);
             setError("Failed to delete item. Please try again.");
