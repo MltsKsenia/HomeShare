@@ -108,7 +108,7 @@ const EditItem: React.FC = () => {
 
             console.log('Response from server:', response.data);
             alert("Item updated successfully!");
-            navigate('/home');
+            navigate('/catalog');
         } catch (error) {
             console.error("Error updating item:", error);
             alert("Failed to update item. Please try again.");

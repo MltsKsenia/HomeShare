@@ -66,7 +66,7 @@ const AddItem: React.FC = () => {
             });
 
             alert("Item created successfully!");
-            navigate('/home');
+            navigate('/catalog');
         } catch (error) {
             console.error("Error creating item:", error);
             alert("Failed to create item. Please try again.");
