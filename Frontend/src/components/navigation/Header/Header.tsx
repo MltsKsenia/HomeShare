@@ -22,7 +22,7 @@ const Header: React.FC = () => {
     const checkUserIdAndNavigate = (path: string) => {
         const userId = localStorage.getItem('userId');
         if (!userId) {
-            navigate('/register');
+            navigate('/');
         } else {
             navigate(path);
         }
