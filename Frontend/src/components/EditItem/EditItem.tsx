@@ -116,78 +116,80 @@ const EditItem: React.FC = () => {
     };
 
     return (
-        <div className="add-item">
+        <div>
             <Header />
-            <form onSubmit={handleSubmit}>
-                <h2>Edit Item</h2>
-                <input
-                    type="text"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-                <br />
-                <textarea
-                    placeholder="Description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-                <br />
-                <input
-                    type="text"
-                    placeholder="Category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                />
-                <div>
+            <div className="edit-item">
+                <form onSubmit={handleSubmit}>
+                    <h2>Edit Item</h2>
+                    <input
+                        type="text"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
                     <br />
-                    <div className="file-upload">
-                        <label htmlFor="fileInput" className="custom-file-upload">
-                            Upload Image
-                        </label>
-                        <input
-                            id="fileInput"
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => {
-                                if (e.target.files && e.target.files[0]) {
-                                    uploadImage(e.target.files[0]);
-                                }
-                            }}
+                    <textarea
+                        placeholder="Description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                    <br />
+                    <input
+                        type="text"
+                        placeholder="Category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    />
+                    <div>
+                        <br />
+                        <div className="file-upload">
+                            <label htmlFor="fileInput" className="custom-file-upload">
+                                Upload Image
+                            </label>
+                            <input
+                                id="fileInput"
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                    if (e.target.files && e.target.files[0]) {
+                                        uploadImage(e.target.files[0]);
+                                    }
+                                }}
+                            />
+                        </div>
+                        <br />
+                    </div>
+                    {image_url && (
+                        <div>
+                            <img src={image_url} alt="Uploaded" style={{ width: '100px', height: '100px' }} />
+                        </div>
+                    )}
+                    <div className='date-picker-container'>
+                        <label>Available Days:</label>
+                        <br />
+                        <DatePicker
+                            selected={startDate}
+                            onChange={(date) => date && setStartDate(date)}
+                            selectsStart
+                            startDate={startDate}
+                            endDate={endDate}
+                            placeholderText="Start Date"
+                        />
+                        <br />
+                        <DatePicker
+                            selected={endDate}
+                            onChange={(date) => date && setEndDate(date)}
+                            selectsEnd
+                            startDate={startDate}
+                            endDate={endDate}
+                            minDate={startDate}
+                            placeholderText="End Date"
                         />
                     </div>
-                    <br />
-                </div>
-                {image_url && (
-                    <div>
-                        <img src={image_url} alt="Uploaded" style={{ width: '100px', height: '100px' }} />
-                    </div>
-                )}
-                <div className='date-picker-container'>
-                    <label>Available Days:</label>
-                    <br />
-                    <DatePicker
-                        selected={startDate}
-                        onChange={(date) => date && setStartDate(date)}
-                        selectsStart
-                        startDate={startDate}
-                        endDate={endDate}
-                        placeholderText="Start Date"
-                    />
-                    <br />
-                    <DatePicker
-                        selected={endDate}
-                        onChange={(date) => date && setEndDate(date)}
-                        selectsEnd
-                        startDate={startDate}
-                        endDate={endDate}
-                        minDate={startDate}
-                        placeholderText="End Date"
-                    />
-                </div>
-                <button className='add-item-button' type="submit">Update Item</button>
-            </form>
+                    <button className='edit-item-button' type="submit">Update Item</button>
+                </form>
+            </div>
             <Footer />
         </div>
     );

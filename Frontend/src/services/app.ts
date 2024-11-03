@@ -1,5 +1,6 @@
 // servises/app.ts
 import axios from 'axios';
+
 const API_URL = '/api';
 export const fetchItems = async () => {
     try {

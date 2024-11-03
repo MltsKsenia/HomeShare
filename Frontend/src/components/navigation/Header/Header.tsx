@@ -19,12 +19,21 @@ const Header: React.FC = () => {
         }
     }, []);
 
+    const checkUserIdAndNavigate = (path: string) => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            navigate('/register');
+        } else {
+            navigate(path);
+        }
+    };
+
     const handleHomeClick = () => {
         navigate('/');
     };
 
     const handleProfileClick = () => {
-        navigate('/my-profile');
+        checkUserIdAndNavigate('/my-profile');
     };
 
     return (

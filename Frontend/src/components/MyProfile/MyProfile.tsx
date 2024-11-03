@@ -237,7 +237,6 @@ const MyProfile: React.FC = () => {
                                     )}
                                 </div>
                                 <p>Date of Birth:</p>
-                                <p>Date of Birth:</p>
                                 <input
                                     type="date"
                                     placeholder="Date of Birth"
