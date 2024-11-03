@@ -23,9 +23,6 @@ router.put('/user/:userId/password', userController.updatePassword);
 // Delete Profile
 router.delete('/users/:userId', userController.deleteUser);
 
-// Add Profile Information
-router.post('/profile', userController.createUserProfile);
-
 // Update Profile Information
 router.put('/user/:userId/profile', userController.updateUserProfile);
 

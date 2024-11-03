@@ -11,24 +11,33 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 const Footer: React.FC = () => {
     const navigate = useNavigate();
 
+    const checkUserIdAndNavigate = (path: string) => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            navigate('/');
+        } else {
+            navigate(path);
+        }
+    };
+
     const handleHomeClick = () => {
         navigate('/');
     };
 
     const handleCatalogClick = () => {
-        navigate('/catalog');
+        checkUserIdAndNavigate('/catalog');
     };
 
     const handleAddItemClick = () => {
-        navigate('/add-item');
+        checkUserIdAndNavigate('/add-item');
     };
 
     const handleItemsClick = () => {
-        navigate('/my-items');
+        checkUserIdAndNavigate('/my-items');
     };
 
     const handleOrdersClick = () => {
-        navigate('/my-orders');
+        checkUserIdAndNavigate('/my-orders');
     };
 
     return (

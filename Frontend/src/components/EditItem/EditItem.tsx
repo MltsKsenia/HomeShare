@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../navigation/Header/Header';
 import Footer from '../navigation/Footer/Footer';
-import '../AddItem/AddItem.css';
+import './EditItem.css';
 
 const EditItem: React.FC = () => {
     const [name, setName] = useState('');
@@ -118,7 +118,7 @@ const EditItem: React.FC = () => {
     return (
         <div>
             <Header />
-            <div className="add-item">
+            <div className="edit-item">
                 <form onSubmit={handleSubmit}>
                     <h2>Edit Item</h2>
                     <input
@@ -187,7 +187,7 @@ const EditItem: React.FC = () => {
                             placeholderText="End Date"
                         />
                     </div>
-                    <button className='add-item-button' type="submit">Update Item</button>
+                    <button className='edit-item-button' type="submit">Update Item</button>
                 </form>
             </div>
             <Footer />

@@ -25,7 +25,8 @@ app.use(express.json());
 app.use(session({
     store: new pgSession({
         pool: pool,
-        tableName: 'session'
+        tableName: 'session',
+        createTableIfMissing: true
     }),
     secret: process.env.JWT_SECRET,
     resave: false,
@@ -35,6 +36,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24
     }
 }));
+
 // API routes
 app.use('/api', userRoutes);
 app.use('/api', itemRoutes);
