@@ -47,6 +47,7 @@ app.use(express.static(path.resolve(__dirname, '..', 'Frontend', 'dist')));
 
 // This handles any requests that don't match the ones above, returning the React app
 app.get('*', (req, res) => {
+    console.log('Request received for:', req.url);
     res.sendFile(path.resolve(__dirname, '..', 'Frontend', 'dist', 'index.html'));
 });
 
